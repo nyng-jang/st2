@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="전자전기공학을 전공하고 RF, 모빌리티 전장, 브레이크 시스템 검증 경험을 쌓아온 엔지니어 소개"
+  >
+
+  <title>엔지니어 한 페이지 소개</title>
+
+  <style>
+    /* =========================================================
+       기본 설정
+       ========================================================= */
+
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #eef2f5;
+
+      --text: #18232d;
+      --text-secondary: #465461;
+      --text-muted: #687582;
+
+      --primary: #174a7e;
+      --primary-dark: #10365c;
+      --primary-soft: #e8f0f7;
+
+      --success: #1d5a37;
+      --danger: #7a2929;
+
+      --border: #cbd3da;
+      --border-dark: #9ca8b2;
+
+      --focus: #a85f00;
+
+      --shadow: 0 8px 22px rgba(18, 35, 50, 0.08);
+
+      --radius: 16px;
+      --small-radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+
+      background: var(--bg);
+      color: var(--text);
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans KR",
+        "Malgun Gothic",
+        Arial,
+        sans-serif;
+
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    h1,
+    h2,
+    h3 {
+      letter-spacing: -0.035em;
+    }
+
+    /* =========================================================
+       공통 레이아웃
+       ========================================================= */
+
+    .page {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 16px;
+      z-index: 1000;
+
+      padding: 10px 16px;
+
+      background: #111;
+      color: #fff;
+
+      border-radius: 8px;
+
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    section {
+      scroll-margin-top: 20px;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      min-height: 330px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 38px 0 30px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f4f6f8 0%,
+          #edf2f6 100%
+        );
+    }
+
+    .hero-inner {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(260px, 0.75fr);
+
+      gap: 38px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+
+      color: var(--primary);
+
+      font-size: 0.78rem;
+      font-weight: 900;
+
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 0;
+
+      font-size: clamp(2.25rem, 4.5vw, 3.65rem);
+      line-height: 1.1;
+    }
+
+    .target-purpose {
+      max-width: 800px;
+
+      margin: 16px 0 20px;
+
+      color: var(--text-secondary);
+
+      font-size: clamp(0.98rem, 1.6vw, 1.12rem);
+      font-weight: 600;
+
+      line-height: 1.7;
+    }
+
+    .target-purpose strong {
+      color: var(--primary-dark);
+    }
+
+    /* =========================================================
+       Hero 태그
+       ========================================================= */
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+    }
+
+    .tag-button {
+      min-height: 38px;
+
+      padding: 7px 14px;
+
+      border: 1px solid var(--primary);
+      border-radius: 999px;
+
+      background: var(--surface);
+      color: var(--primary-dark);
+
+      font-size: 0.88rem;
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition:
+        background-color 150ms ease,
+        color 150ms ease;
+    }
+
+    .tag-button:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* =========================================================
+       Hero 요약 카드
+       ========================================================= */
+
+    .hero-card {
+      padding: 22px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background: var(--surface);
+
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card-title {
+      margin: 0 0 12px;
+
+      color: var(--primary-dark);
+
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .hero-card p {
+      margin: 0;
+
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+    }
+
+    .hero-card-list {
+      display: grid;
+      gap: 7px;
+
+      margin: 14px 0 0;
+      padding: 0;
+
+      list-style: none;
+    }
+
+    .hero-card-list li {
+      position: relative;
+
+      padding-left: 15px;
+
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+    }
+
+    .hero-card-list li::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      top: 0.72em;
+
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    /* =========================================================
+       Section 공통
+       ========================================================= */
+
+    .section {
+      padding: 48px 0 54px;
+    }
+
+    .section-header {
+      margin-bottom: 20px;
+    }
+
+    .section-label {
+      margin: 0 0 5px;
+
+      color: var(--primary);
+
+      font-size: 0.75rem;
+      font-weight: 900;
+
+      letter-spacing: 0.1em;
+    }
+
+    h2 {
+      margin: 0;
+
+      font-size: clamp(1.65rem, 3vw, 2.2rem);
+      line-height: 1.25;
+    }
+
+    .section-description {
+      margin: 7px 0 0;
+
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* =========================================================
+       강점 탭
+       ========================================================= */
+
+    .strength-tabs {
+      display: flex;
+      gap: 6px;
+
+      padding: 5px;
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      background: var(--surface-soft);
+    }
+
+    .strength-tab {
+      flex: 1;
+
+      min-height: 48px;
+
+      padding: 8px 12px;
+
+      border: 0;
+      border-radius: 8px;
+
+      background: transparent;
+      color: var(--text-secondary);
+
+      font-size: 0.9rem;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .strength-tab:hover {
+      background: var(--surface);
+      color: var(--primary-dark);
+    }
+
+    .strength-tab[aria-selected="true"] {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* =========================================================
+       STAR 패널
+       ========================================================= */
+
+    .strength-panel {
+      display: none;
+
+      margin-top: 12px;
+      padding: 22px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background: var(--surface);
+
+      box-shadow: var(--shadow);
+    }
+
+    .strength-panel.is-active {
+      display: block;
+    }
+
+    .strength-panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      gap: 18px;
+
+      margin-bottom: 17px;
+    }
+
+    .strength-title {
+      margin: 0;
+
+      color: var(--primary-dark);
+
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .strength-category {
+      flex-shrink: 0;
+
+      padding: 4px 9px;
+
+      border-radius: 999px;
+
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+
+      font-size: 0.7rem;
+      font-weight: 900;
+    }
+
+    .star-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 10px;
+    }
+
+    .star-card {
+      padding: 16px;
+
+      border: 1px solid #d7dee4;
+      border-radius: var(--small-radius);
+
+      background: var(--surface-soft);
+    }
+
+    .star-label {
+      display: block;
+
+      margin-bottom: 5px;
+
+      color: var(--primary-dark);
+
+      font-size: 0.72rem;
+      font-weight: 900;
+
+      letter-spacing: 0.04em;
+    }
+
+    .star-card p {
+      margin: 0;
+
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+    }
+
+    /* =========================================================
+       Evidence 토글
+       ========================================================= */
+
+    .evidence-area {
+      margin-top: 12px;
+    }
+
+    .evidence-button {
+      min-height: 38px;
+
+      padding: 7px 13px;
+
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+
+      background: var(--surface);
+      color: var(--primary-dark);
+
+      font-size: 0.82rem;
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .evidence-button:hover {
+      background: var(--primary-soft);
+    }
+
+    .evidence-content {
+      margin-top: 9px;
+      padding: 13px 15px;
+
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+
+      background: #f6f8fa;
+    }
+
+    .evidence-content p {
+      margin: 0;
+
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    .evidence-content strong {
+      color: var(--text);
+    }
+
+    /* =========================================================
+       하단 정보 공개 범위
+       약관/정책처럼 작게 배치
+       ========================================================= */
+
+    .disclosure {
+      padding: 0 0 26px;
+    }
+
+    .disclosure-box {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .disclosure-toggle {
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 16px;
+
+      min-height: 48px;
+
+      padding: 10px 2px;
+
+      border: 0;
+
+      background: transparent;
+      color: var(--text-muted);
+
+      text-align: left;
+
+      font-size: 0.78rem;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .disclosure-toggle:hover {
+      color: var(--primary-dark);
+    }
+
+    .disclosure-toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .disclosure-icon {
+      display: inline-block;
+
+      font-size: 0.72rem;
+
+      transition: transform 150ms ease;
+    }
+
+    .disclosure-toggle[aria-expanded="true"]
+      .disclosure-icon {
+      transform: rotate(180deg);
+    }
+
+    .disclosure-content {
+      padding: 0 2px 18px;
+    }
+
+    .disclosure-content[hidden] {
+      display: none;
+    }
+
+    .disclosure-intro {
+      margin: 0 0 14px;
+
+      color: var(--text-muted);
+      font-size: 0.74rem;
+    }
+
+    .disclosure-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 16px;
+    }
+
+    .disclosure-column {
+      min-width: 0;
+    }
+
+    .disclosure-column h3 {
+      margin: 0 0 8px;
+
+      font-size: 0.78rem;
+    }
+
+    .disclosure-column.public h3 {
+      color: var(--success);
+    }
+
+    .disclosure-column.private h3 {
+      color: var(--danger);
+    }
+
+    .disclosure-column ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .disclosure-column li {
+      margin-bottom: 5px;
+
+      color: var(--text-muted);
+
+      font-size: 0.73rem;
+    }
+
+    .disclosure-column li:last-child {
+      margin-bottom: 0;
+    }
+
+    .disclosure-column strong {
+      color: var(--text-secondary);
+    }
+
+    /* =========================================================
+       Footer
+       ========================================================= */
+
+    footer {
+      padding: 24px 0 32px;
+
+      color: var(--text-muted);
+
+      font-size: 0.72rem;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* =========================================================
+       Responsive
+       ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .hero-card {
+        max-width: 680px;
+      }
+
+      .star-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 640px) {
+
+      .page {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .hero {
+        padding: 30px 0 26px;
+      }
+
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      .target-purpose {
+        font-size: 0.95rem;
+      }
+
+      .strength-tabs {
+        flex-direction: column;
+      }
+
+      .strength-tab {
+        width: 100%;
+      }
+
+      .strength-panel-header {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .disclosure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 38px 0 46px;
+      }
+
+      .strength-panel {
+        padding: 18px;
+      }
+
+    }
+
+    /* =========================================================
+       Reduced Motion
+       ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- =======================================================
+       Skip Link
+       ======================================================= -->
+
+  <a
+    class="skip-link"
+    href="#main-content"
+  >
+    본문으로 바로가기
+  </a>
+
+
+  <!-- =======================================================
+       HERO
+       ======================================================= -->
+
+  <header
+    class="hero"
+    aria-labelledby="page-title"
+  >
+
+    <div class="page hero-inner">
+
+      <div>
+
+        <p class="eyebrow">
+          ENGINEER PROFILE
+        </p>
+
+        <h1 id="page-title">
+          개발자/엔지니어 소개
+        </h1>
+
+        <!-- 대상 + 목적 한 문장 -->
+        <p class="target-purpose">
+          이 페이지는
+          <strong>함께 일할 동료와 채용 담당자</strong>에게
+          <strong>문제를 분석하고 검증하는 엔지니어로서의 강점과 경험</strong>을
+          보여주는 한 페이지입니다.
+        </p>
+
+        <!-- 주요 경험 바로가기 -->
+        <ul
+          class="tag-list"
+          aria-label="주요 경험 바로가기"
+        >
+
+          <li>
+            <button
+              type="button"
+              class="tag-button"
+              data-target-tab="automotive"
+            >
+              #자작자동차
+            </button>
+          </li>
+
+          <li>
+            <button
+              type="button"
+              class="tag-button"
+              data-target-tab="verification"
+            >
+              #임베디드검증
+            </button>
+          </li>
+
+          <li>
+            <button
+              type="button"
+              class="tag-button"
+              data-target-tab="rf"
+            >
+              #RF탐색
+            </button>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <aside
+        class="hero-card"
+        aria-label="엔지니어 핵심 방향"
+      >
+
+        <p class="hero-card-title">
+          문제를 보는 기준
+        </p>
+
+        <p>
+          증상보다 원인을 먼저 확인하고,
+          회로·센서·제어·시스템 사이의 연결을 기준으로
+          문제를 좁혀갑니다.
+        </p>
+
+        <ul class="hero-card-list">
+
+          <li>
+            데이터와 측정 결과를 기준으로 판단
+          </li>
+
+          <li>
+            하드웨어와 시스템 동작을 함께 확인
+          </li>
+
+          <li>
+            요구사항과 검증 결과를 연결
+          </li>
+
+        </ul>
+
+      </aside>
+
+    </div>
+
+  </header>
+
+
+  <main id="main-content">
+
+
+    <!-- =====================================================
+         SECTION 1
+         ===================================================== -->
+
+    <section
+      id="strengths"
+      class="section"
+      aria-labelledby="strengths-title"
+    >
+
+      <div class="page">
+
+        <div class="section-header">
+
+          <p class="section-label">
+            STRENGTHS &amp; INTERESTS
+          </p>
+
+          <h2 id="strengths-title">
+            강점 &amp; 취향
+          </h2>
+
+          <p class="section-description">
+            세 가지 경험을 상황·행동·결과와 구체적인 증거로 정리했습니다.
+          </p>
+
+        </div>
+
+
+        <!-- =================================================
+             탭
+             ================================================= -->
+
+        <div
+          class="strength-tabs"
+          role="tablist"
+          aria-label="강점 경험 선택"
+        >
+
+          <button
+            type="button"
+            id="tab-automotive"
+            class="strength-tab"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-automotive"
+            tabindex="0"
+            data-tab="automotive"
+          >
+            자작자동차
+          </button>
+
+          <button
+            type="button"
+            id="tab-verification"
+            class="strength-tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-verification"
+            tabindex="-1"
+            data-tab="verification"
+          >
+            HL만도 인턴
+          </button>
+
+          <button
+            type="button"
+            id="tab-rf"
+            class="strength-tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-rf"
+            tabindex="-1"
+            data-tab="rf"
+          >
+            RF &amp; 전파
+          </button>
+
+        </div>
+
+
+        <!-- =================================================
+             자작자동차
+             ================================================= -->
+
+        <article
+          id="panel-automotive"
+          class="strength-panel is-active"
+          role="tabpanel"
+          aria-labelledby="tab-automotive"
+        >
+
+          <div class="strength-panel-header">
+
+            <h3 class="strength-title">
+              자작자동차 동아리 — 시스템 설계 및 최적화
+            </h3>
+
+            <span class="strength-category">
+              SYSTEM
+            </span>
+
+          </div>
+
+
+          <div class="star-grid">
+
+            <div class="star-card">
+
+              <span class="star-label">
+                S · Situation
+              </span>
+
+              <p>
+                대회 출전 차량을 개발하는 과정에서
+                주행 중 모터가 셧다운되는 문제가 발생했습니다.
+              </p>
+
+            </div>
+
+
+            <div class="star-card">
+
+              <span class="star-label">
+                A · Action
+              </span>
+
+              <p>
+                디지털 사이드 미러와 비상 제동 시스템을 개발하고,
+                TPS 전압 특성과 주행 조건을 확인해
+                제어 설정을 조정했습니다.
+              </p>
+
+            </div>
+
+
+            <div class="star-card">
+
+              <span class="star-label">
+                R · Result
+              </span>
+
+              <p>
+                스마트 e-모빌리티 경진대회를 완주했으며,
+                측정값과 주행 결과를 비교해 문제 원인을 좁히는
+                경험을 쌓았습니다.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="evidence-area">
+
+            <button
+              type="button"
+              class="evidence-button"
+              aria-expanded="false"
+              aria-controls="evidence-automotive"
+            >
+              증거 상세보기
+            </button>
+
+            <div
+              id="evidence-automotive"
+              class="evidence-content"
+              hidden
+            >
+
+              <p>
+                <strong>Evidence · 확인 가능한 근거:</strong>
+                컨트롤러-PC의 입력값과 전압을 확인하고
+                온도계로 컨트롤러 온도를 측정했습니다.
+                약 3분 주행 테스트를 반복하며 전류 제한 설정에 따른
+                차량 거동을 비교했습니다.
+                디지털 사이드 미러에서는 노면 진동에 따른 인식 저하를
+                주행 조건별로 비교해 원인을 확인했습니다.
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================================
+             HL만도
+             ================================================= -->
+
+        <article
+          id="panel-verification"
+          class="strength-panel"
+          role="tabpanel"
+          aria-labelledby="tab-verification"
+          hidden
+        >
+
+          <div class="strength-panel-header">
+
+            <h3 class="strength-title">
+              HL만도 인턴 — 임베디드 제어 &amp; 검증
+            </h3>
+
+            <span class="strength-category">
+              VERIFICATION
+            </span>
+
+          </div>
+
+
+          <div class="star-grid">
+
+            <div class="star-card">
+
+              <span class="star-label">
+                S · Situation
+              </span>
+
+              <p>
+                브레이크 시스템 검증팀 인턴으로 근무하며
+                요구사항과 테스트 결과를 이해하고
+                검증 업무 흐름을 따라가야 했습니다.
+              </p>
+
+            </div>
+
+
+            <div class="star-card">
+
+              <span class="star-label">
+                A · Action
+              </span>
+
+              <p>
+                FSM 문서를 정리하고 요구사항을 분석했습니다.
+                검증 결과 화면과 테스트 조건·결과를 확인하며
+                회의에서 논의되는 요구사항과 테스트 케이스 이슈를
+                정리했습니다.
+              </p>
+
+            </div>
+
+
+            <div class="star-card">
+
+              <span class="star-label">
+                R · Result
+              </span>
+
+              <p>
+                브레이크 시스템 검증의 흐름과
+                요구사항 기반 문서화 방식을 파악하고
+                실제 검증 업무의 기준을 이해했습니다.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="evidence-area">
+
+            <button
+              type="button"
+              class="evidence-button"
+              aria-expanded="false"
+              aria-controls="evidence-verification"
+            >
+              증거 상세보기
+            </button>
+
+            <div
+              id="evidence-verification"
+              class="evidence-content"
+              hidden
+            >
+
+              <p>
+                <strong>Evidence · 확인 가능한 근거:</strong>
+                FSM(Fail-Safety Management) 문서를 정리하고
+                요구사항 및 테스트 케이스 관련 이슈를 확인했습니다.
+                검증 결과 화면과 테스트 조건·결과를 기록하며
+                검증 업무의 흐름과 고객 대응 문서의 형식을 파악했습니다.
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================================
+             RF
+             ================================================= -->
+
+        <article
+          id="panel-rf"
+          class="strength-panel"
+          role="tabpanel"
+          aria-labelledby="tab-rf"
+          hidden
+        >
+
+          <div class="strength-panel-header">
+
+            <h3 class="strength-title">
+              RF &amp; 전파 기술 탐색 — 하드웨어/송신 Infrastructure
+            </h3>
+
+            <span class="strength-category">
+              RF
+            </span>
+
+          </div>
+
+
+          <div class="star-grid">
+
+            <div class="star-card">
+
+              <span class="star-label">
+                S · Situation
+              </span>
+
+              <p>
+                RF 파워 앰프 설계 연구와 전파 관리 실무를 통해
+                RF 시스템이 실제 송신 환경에서 어떻게 구성되는지
+                확인했습니다.
+              </p>
+
+            </div>
+
+
+            <div class="star-card">
+
+              <span class="star-label">
+                A · Action
+              </span>
+
+              <p>
+                S-band 광대역 Doherty PA 설계에서
+                반복적인 시뮬레이션과 임피던스 정합을 수행하고,
+                송신소 현장에서 대형 앰프와 동축케이블 구조를
+                관찰했습니다.
+              </p>
+
+            </div>
+
+
+            <div class="star-card">
+
+              <span class="star-label">
+                R · Result
+              </span>
+
+              <p>
+                RF 회로 설계 경험과 송신 Infrastructure의
+                실제 구성에 대한 이해를 연결할 수 있게 되었습니다.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="evidence-area">
+
+            <button
+              type="button"
+              class="evidence-button"
+              aria-expanded="false"
+              aria-controls="evidence-rf"
+            >
+              증거 상세보기
+            </button>
+
+            <div
+              id="evidence-rf"
+              class="evidence-content"
+              hidden
+            >
+
+              <p>
+                <strong>Evidence · 확인 가능한 근거:</strong>
+                2.5~3.5 GHz S-band 대역의 Doherty PA IC 설계 과정에서
+                300회 이상의 시뮬레이션을 수행하며
+                LCL 정합 구조를 검토했습니다.
+                또한 송신 설비의 대형 앰프와 동축케이블 연결 구조를
+                현장에서 관찰했습니다.
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         하단 정보 공개 범위
+         약관처럼 작게 표시
+         ===================================================== -->
+
+    <section
+      id="disclosure"
+      class="disclosure"
+      aria-labelledby="disclosure-title"
+    >
+
+      <div class="page">
+
+        <div class="disclosure-box">
+
+          <button
+            type="button"
+            id="disclosure-toggle"
+            class="disclosure-toggle"
+            aria-expanded="false"
+            aria-controls="disclosure-content"
+          >
+
+            <span
+              id="disclosure-title"
+              class="disclosure-toggle-label"
+            >
+              <span aria-hidden="true">ⓘ</span>
+              정보 공개 범위 및 판단 근거
+            </span>
+
+            <span
+              class="disclosure-icon"
+              aria-hidden="true"
+            >
+              ▼
+            </span>
+
+          </button>
+
+
+          <div
+            id="disclosure-content"
+            class="disclosure-content"
+            hidden
+          >
+
+            <p class="disclosure-intro">
+              이 페이지는 무로그인 공개를 전제로,
+              경험을 이해하는 데 필요한 정보만 공개하고
+              개인정보 및 불필요한 세부 정보는 제외했습니다.
+            </p>
+
+
+            <div class="disclosure-grid">
+
+              <!-- 공개 -->
+
+              <div class="disclosure-column public">
+
+                <h3>
+                  공개하는 정보
+                </h3>
+
+                <ol>
+
+                  <li>
+                    <strong>전공/학위</strong> —
+                    성균관대 전자전기공학부
+                  </li>
+
+                  <li>
+                    <strong>주요 활동 경험</strong> —
+                    자작자동차 동아리, HL만도 인턴, 대학원 연구실
+                  </li>
+
+                  <li>
+                    <strong>수상 이력</strong> —
+                    자율주행 해커톤 1등
+                  </li>
+
+                </ol>
+
+              </div>
+
+
+              <!-- 비공개 -->
+
+              <div class="disclosure-column private">
+
+                <h3>
+                  의도적으로 넣지 않은 정보
+                </h3>
+
+                <ol>
+
+                  <li>
+                    <strong>개인 연락처</strong> —
+                    전화번호·개인 이메일은 스팸 및 오남용 방지를 위해
+                    공개하지 않았습니다.
+                  </li>
+
+                  <li>
+                    <strong>학점 등 세부 정량 수치</strong> —
+                    숫자보다 실제 경험의 맥락을 보여주는 데
+                    집중하기 위해 제외했습니다.
+                  </li>
+
+                  <li>
+                    <strong>현재 소속 기관의 업무 세부사항</strong> —
+                    보안 및 정보 보호를 고려해
+                    구체적인 내부 업무 내용은 공개하지 않았습니다.
+                  </li>
+
+                </ol>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       Footer
+       ======================================================= -->
+
+  <footer>
+
+    <div class="page">
+
+      <p>
+        Engineer Profile · Single Page · Accessible Web
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       JavaScript
+       ======================================================= -->
+
+  <script>
+    (() => {
+      "use strict";
+
+
+      /* =====================================================
+         요소 가져오기
+         ===================================================== */
+
+      const tabs = Array.from(
+        document.querySelectorAll('[role="tab"]')
+      );
+
+      const panels = Array.from(
+        document.querySelectorAll('[role="tabpanel"]')
+      );
+
+      const tagButtons = Array.from(
+        document.querySelectorAll(".tag-button")
+      );
+
+      const evidenceButtons = Array.from(
+        document.querySelectorAll(".evidence-button")
+      );
+
+      const disclosureToggle =
+        document.getElementById(
+          "disclosure-toggle"
+        );
+
+      const disclosureContent =
+        document.getElementById(
+          "disclosure-content"
+        );
+
+
+      /* =====================================================
+         탭 찾기
+         ===================================================== */
+
+      function getTab(tabName) {
+
+        return document.querySelector(
+          `[role="tab"][data-tab="${tabName}"]`
+        );
+
+      }
+
+
+      function getPanel(tabName) {
+
+        return document.getElementById(
+          `panel-${tabName}`
+        );
+
+      }
+
+
+      /* =====================================================
+         탭 활성화
+         ===================================================== */
+
+      function activateTab(
+        tabName,
+        moveFocus = false
+      ) {
+
+        const selectedTab =
+          getTab(tabName);
+
+        const selectedPanel =
+          getPanel(tabName);
+
+
+        if (
+          !selectedTab ||
+          !selectedPanel
+        ) {
+          return;
+        }
+
+
+        tabs.forEach((tab) => {
+
+          const isSelected =
+            tab === selectedTab;
+
+
+          tab.setAttribute(
+            "aria-selected",
+            String(isSelected)
+          );
+
+
+          tab.tabIndex =
+            isSelected
+              ? 0
+              : -1;
+
+        });
+
+
+        panels.forEach((panel) => {
+
+          const isActive =
+            panel === selectedPanel;
+
+
+          panel.classList.toggle(
+            "is-active",
+            isActive
+          );
+
+
+          panel.hidden =
+            !isActive;
+
+        });
+
+
+        if (moveFocus) {
+
+          selectedTab.focus();
+
+        }
+
+      }
+
+
+      /* =====================================================
+         탭 클릭
+         ===================================================== */
+
+      tabs.forEach((tab) => {
+
+        tab.addEventListener(
+          "click",
+          () => {
+
+            activateTab(
+              tab.dataset.tab
+            );
+
+          }
+        );
+
+
+        /* ===================================================
+           탭 키보드 이동
+           =================================================== */
+
+        tab.addEventListener(
+          "keydown",
+          (event) => {
+
+            const currentIndex =
+              tabs.indexOf(tab);
+
+            let nextIndex =
+              currentIndex;
+
+
+            if (
+              event.key === "ArrowRight" ||
+              event.key === "ArrowDown"
+            ) {
+
+              nextIndex =
+                (currentIndex + 1) %
+                tabs.length;
+
+              event.preventDefault();
+
+            }
+
+
+            if (
+              event.key === "ArrowLeft" ||
+              event.key === "ArrowUp"
+            ) {
+
+              nextIndex =
+                (currentIndex - 1 + tabs.length) %
+                tabs.length;
+
+              event.preventDefault();
+
+            }
+
+
+            if (
+              event.key === "Home"
+            ) {
+
+              nextIndex = 0;
+
+              event.preventDefault();
+
+            }
+
+
+            if (
+              event.key === "End"
+            ) {
+
+              nextIndex =
+                tabs.length - 1;
+
+              event.preventDefault();
+
+            }
+
+
+            if (
+              nextIndex !== currentIndex
+            ) {
+
+              const nextTab =
+                tabs[nextIndex];
+
+
+              activateTab(
+                nextTab.dataset.tab,
+                true
+              );
+
+            }
+
+          }
+        );
+
+      });
+
+
+      /* =====================================================
+         Hero 태그 -> 해당 탭 이동
+         ===================================================== */
+
+      tagButtons.forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const targetTab =
+              button.dataset.targetTab;
+
+            const targetButton =
+              getTab(targetTab);
+
+            const strengths =
+              document.getElementById(
+                "strengths"
+              );
+
+
+            if (
+              !targetButton ||
+              !strengths
+            ) {
+              return;
+            }
+
+
+            activateTab(
+              targetTab
+            );
+
+
+            const reducedMotion =
+              window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+              ).matches;
+
+
+            strengths.scrollIntoView({
+
+              behavior:
+                reducedMotion
+                  ? "auto"
+                  : "smooth",
+
+              block: "start"
+
+            });
+
+
+            window.setTimeout(
+              () => {
+
+                targetButton.focus();
+
+              },
+
+              reducedMotion
+                ? 0
+                : 80
+            );
+
+          }
+        );
+
+      });
+
+
+      /* =====================================================
+         Evidence 토글
+         ===================================================== */
+
+      evidenceButtons.forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const contentId =
+              button.getAttribute(
+                "aria-controls"
+              );
+
+            const content =
+              document.getElementById(
+                contentId
+              );
+
+
+            if (!content) {
+              return;
+            }
+
+
+            const isOpen =
+              button.getAttribute(
+                "aria-expanded"
+              ) === "true";
+
+
+            button.setAttribute(
+              "aria-expanded",
+              String(!isOpen)
+            );
+
+
+            content.hidden =
+              isOpen;
+
+
+            button.textContent =
+              isOpen
+                ? "증거 상세보기"
+                : "증거 닫기";
+
+          }
+        );
+
+      });
+
+
+      /* =====================================================
+         정보 공개 범위 토글
+         ===================================================== */
+
+      if (
+        disclosureToggle &&
+        disclosureContent
+      ) {
+
+        disclosureToggle.addEventListener(
+          "click",
+          () => {
+
+            const isOpen =
+              disclosureToggle.getAttribute(
+                "aria-expanded"
+              ) === "true";
+
+
+            disclosureToggle.setAttribute(
+              "aria-expanded",
+              String(!isOpen)
+            );
+
+
+            disclosureContent.hidden =
+              isOpen;
+
+          }
+        );
+
+      }
+
+
+      /* =====================================================
+         초기 URL Hash
+         ===================================================== */
+
+      const initialHash =
+        window.location.hash
+          .replace("#", "");
+
+
+      const validTabs = [
+        "automotive",
+        "verification",
+        "rf"
+      ];
+
+
+      if (
+        validTabs.includes(
+          initialHash
+        )
+      ) {
+
+        activateTab(
+          initialHash
+        );
+
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
