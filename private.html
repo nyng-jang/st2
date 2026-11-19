@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>비공개 영역 | 장나영 포트폴리오</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    /* 이 파일에는 비공개 내용이 없습니다. 로그인한 뒤 /api/private 응답으로만 받아 화면에 그립니다. */
+    :root {
+      --brand-navy: #194390; --brand-mid: #5c93cc;
+      --bg: #f5f8fc; --surface: #fff; --surface-soft: #eef4fb;
+      --text: #0f1b33; --text-sub: #46546d; --text-muted: #56637c;
+      --line: #dde6f2; --danger: #b3261e; --ok: #1e6b3a; --focus: #1f3f97;
+      --radius: 20px; --max: 880px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.6;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color: var(--brand-navy); }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+    .container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .private-bar { background: var(--brand-navy); color: #fff; }
+    .private-bar .container { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; }
+    .private-bar a { color: #fff; font-weight: 700; }
+    .private-bar strong { font-size: 15px; }
+    main { padding: 28px 0 60px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 18px; }
+    h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: -0.02em; }
+    h2 { margin: 0 0 12px; font-size: 19px; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--text-muted); font-size: 14px; }
+    label { display: block; margin: 10px 0 4px; font-size: 14px; font-weight: 700; color: var(--text-sub); }
+    input, select { width: 100%; max-width: 360px; min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; font: inherit; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+    button { min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid transparent; font: inherit; font-weight: 700; cursor: pointer; }
+    .primary { background: var(--brand-navy); color: #fff; }
+    .soft { background: #fff; border-color: var(--line); color: var(--brand-navy); }
+    .danger { background: #fff; border-color: #e7b9b5; color: var(--danger); min-height: 36px; padding: 0 12px; font-size: 13px; }
+    #status { min-height: 24px; font-weight: 700; }
+    #status.err { color: var(--danger); }
+    #status.ok { color: var(--ok); }
+    .items { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .items li { padding: 14px 16px; border-radius: 14px; background: var(--surface-soft); }
+    .items .kind { font-size: 12px; font-weight: 800; color: var(--brand-navy); letter-spacing: .04em; }
+    .items h3 { margin: 2px 0 4px; font-size: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    code { font-size: 12px; word-break: break-all; }
+    details summary { cursor: pointer; color: var(--text-sub); font-size: 13px; }
+    .table-wrap { overflow-x: auto; }
+    [hidden] { display: none !important; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <div class="private-bar">
+    <div class="container">
+      <strong>🔒 비공개 영역 · 패스키로 로그인한 본인만</strong>
+      <a href="index.html">← 공개 소개로</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <!-- 로그인하지 않았을 때 -->
+    <section id="logged-out" hidden>
+      <div class="card">
+        <h1>패스키로 로그인</h1>
+        <p class="muted">비밀번호는 쓰지 않습니다. 기기의 지문·얼굴·화면 잠금으로 패스키를 사용합니다.</p>
+        <div class="row">
+          <button class="primary" id="btn-login" type="button">패스키로 로그인</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>처음 한 번: 가상 계정에 첫 패스키 등록</h2>
+        <p class="muted">아직 패스키가 없는 가상 계정에만 첫 패스키를 등록할 수 있습니다. 이미 패스키가 있는 계정은 로그인한 뒤 추가합니다.</p>
+        <label for="reg-account">가상 계정</label>
+        <select id="reg-account">
+          <option value="demo-a">demo-a (데모 계정 A)</option>
+          <option value="demo-b">demo-b (데모 계정 B)</option>
+        </select>
+        <label for="reg-name-first">패스키 이름</label>
+        <input id="reg-name-first" maxlength="40" placeholder="예: 내 휴대폰, 노트북 Chrome">
+        <div class="row">
+          <button class="soft" id="btn-register-first" type="button">첫 패스키 등록</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 로그인했을 때 -->
+    <section id="logged-in" hidden>
+      <div class="card">
+        <div class="row" style="justify-content: space-between; margin-top: 0;">
+          <h1 style="margin: 0;"><span id="who"></span> 계정의 비공개 자료</h1>
+          <button class="soft" id="btn-logout" type="button">로그아웃</button>
+        </div>
+        <p class="muted">아래 내용은 모두 직접 지어낸 가상 자료입니다.</p>
+        <ul class="items" id="items"></ul>
+      </div>
+
+      <div class="card">
+        <h2>내 패스키 <span id="pk-count" class="muted"></span></h2>
+        <p class="muted">서버에는 공개키와 자격 증명 ID만 저장됩니다. 개인키는 기기(또는 비밀번호 관리자·보안 키) 밖으로 나오지 않습니다.
+          패스키를 잃어버릴 때를 대비해 두 개 이상 등록해 두세요. 마지막 남은 하나는 지울 수 없습니다.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">이름</th><th scope="col">등록한 날</th><th scope="col">마지막 사용</th><th scope="col">공개키</th><th scope="col"><span class="sr">삭제</span></th></tr></thead>
+            <tbody id="pk-rows"></tbody>
+          </table>
+        </div>
+        <label for="reg-name-more">새 패스키 이름</label>
+        <input id="reg-name-more" maxlength="40" placeholder="예: 보안 키, 다른 휴대폰">
+        <div class="row">
+          <button class="soft" id="btn-register-more" type="button">패스키 추가</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+      const $ = (s) => document.querySelector(s);
+      const status = $("#status");
+      const say = (msg, kind = "") => { status.textContent = msg; status.className = kind; };
+
+      // ---------- base64url <-> ArrayBuffer ----------
+      const toBuf = (b64url) => {
+        const b64 = b64url.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((b64url.length + 3) % 4);
+        return Uint8Array.from(atob(b64), (c) => c.charCodeAt(0)).buffer;
+      };
+      const toB64url = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)))
+        .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+
+      async function api(path, opts = {}) {
+        const res = await fetch(path, {
+          method: opts.method || "GET",
+          headers: opts.body ? { "Content-Type": "application/json" } : {},
+          body: opts.body ? JSON.stringify(opts.body) : undefined,
+          credentials: "same-origin",
+        });
+        const data = await res.json().catch(() => ({}));
+        return { ok: res.ok, status: res.status, data };
+      }
+
+      // 인증기 오류를 사람이 읽을 안내로 바꾼다. 취소하면 서버에 검증 요청을 보내지 않으므로 아무것도 저장되지 않는다.
+      function explain(err) {
+        if (err && err.name === "NotAllowedError") return "패스키 창을 닫았거나 시간이 지나 취소됐어요. 서버에는 아무것도 저장되지 않았어요.";
+        if (err && err.name === "InvalidStateError") return "이 인증기에는 이미 이 계정의 패스키가 있어요. 다른 기기나 보안 키로 등록해 보세요.";
+        if (err && err.name === "SecurityError") return "https 주소(또는 localhost)에서만 패스키를 쓸 수 있어요.";
+        return "패스키를 쓰지 못했어요: " + (err && err.message ? err.message : err);
+      }
+
+      // ---------- 등록 ----------
+      async function register(account, name) {
+        if (!window.PublicKeyCredential) return say("이 브라우저는 패스키를 지원하지 않아요.", "err");
+        say("등록 준비 중…");
+        const opt = await api("/api/register/options", { method: "POST", body: { account } });
+        if (!opt.ok) return say(opt.data.message || "등록을 시작하지 못했어요.", "err");
+        const o = opt.data;
+        let cred;
+        try {
+          cred = await navigator.credentials.create({ publicKey: {
+            ...o,
+            challenge: toBuf(o.challenge),
+            user: { ...o.user, id: toBuf(o.user.id) },
+            excludeCredentials: (o.excludeCredentials || []).map((c) => ({ ...c, id: toBuf(c.id) })),
+          } });
+        } catch (err) { return say(explain(err), "err"); }
+        // 서버로 보내는 것은 clientDataJSON과 attestationObject(공개키 포함)뿐이다. 개인키는 없다.
+        const body = {
+          name,
+          response: {
+            id: cred.id, rawId: toB64url(cred.rawId), type: cred.type,
+            clientExtensionResults: cred.getClientExtensionResults(),
+            authenticatorAttachment: cred.authenticatorAttachment,
+            response: {
+              clientDataJSON: toB64url(cred.response.clientDataJSON),
+              attestationObject: toB64url(cred.response.attestationObject),
+              transports: cred.response.getTransports ? cred.response.getTransports() : [],
+            },
+          },
+        };
+        const v = await api("/api/register/verify", { method: "POST", body });
+        if (!v.ok) return say(v.data.message || "등록을 확인하지 못했어요.", "err");
+        say(`"${v.data.saved.name}" 패스키를 등록했어요.`, "ok");
+        await refresh();
+      }
+
+      // ---------- 로그인 ----------
+      async function login() {
+        if (!window.PublicKeyCredential) return say("이 브라우저는 패스키를 지원하지 않아요.", "err");
+        say("로그인 준비 중…");
+        const opt = await api("/api/login/options", { method: "POST", body: {} });
+        if (!opt.ok) return say("로그인을 시작하지 못했어요.", "err");
+        const o = opt.data;
+        let cred;
+        try {
+          cred = await navigator.credentials.get({ publicKey: {
+            ...o,
+            challenge: toBuf(o.challenge),
+            allowCredentials: (o.allowCredentials || []).map((c) => ({ ...c, id: toBuf(c.id) })),
+          } });
+        } catch (err) { return say(explain(err), "err"); }
+        const body = { response: {
+          id: cred.id, rawId: toB64url(cred.rawId), type: cred.type,
+          clientExtensionResults: cred.getClientExtensionResults(),
+          authenticatorAttachment: cred.authenticatorAttachment,
+          response: {
+            clientDataJSON: toB64url(cred.response.clientDataJSON),
+            authenticatorData: toB64url(cred.response.authenticatorData),
+            signature: toB64url(cred.response.signature),
+            userHandle: cred.response.userHandle ? toB64url(cred.response.userHandle) : undefined,
+          },
+        } };
+        const v = await api("/api/login/verify", { method: "POST", body });
+        if (!v.ok) return say(v.data.message || "로그인하지 못했어요.", "err");
+        say(`"${v.data.credentialName}" 패스키로 로그인했어요.`, "ok");
+        await refresh();
+      }
+
+      // ---------- 화면 그리기 ----------
+      const fmt = (d) => d ? new Date(d).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" }) : "-";
+      const el = (tag, text) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; return e; };
+
+      async function refresh() {
+        const priv = await api("/api/private");
+        if (priv.status === 401) {
+          $("#logged-in").hidden = true; $("#logged-out").hidden = false;
+          $("#items").replaceChildren(); $("#pk-rows").replaceChildren();
+          return;
+        }
+        $("#logged-out").hidden = true; $("#logged-in").hidden = false;
+        $("#who").textContent = priv.data.account;
+        $("#items").replaceChildren(...priv.data.items.map((it) => {
+          const li = el("li");
+          li.append(el("span", it.kind), el("h3", it.title), el("p", it.body));
+          li.firstChild.className = "kind";
+          return li;
+        }));
+        const pk = await api("/api/passkeys");
+        $("#pk-count").textContent = `(${pk.data.count}개)`;
+        $("#pk-rows").replaceChildren(...pk.data.passkeys.map((p) => {
+          const tr = el("tr");
+          const keyCell = el("td");
+          const det = el("details"); det.append(el("summary", p.publicKey.slice(0, 16) + "…"), el("code", p.publicKey));
+          keyCell.append(det);
+          const delCell = el("td");
+          const del = el("button", "삭제"); del.className = "danger"; del.type = "button";
+          del.setAttribute("aria-label", `${p.name} 패스키 삭제`);
+          del.addEventListener("click", () => removeKey(p));
+          delCell.append(del);
+          tr.append(el("td", p.name), el("td", fmt(p.createdAt)), el("td", fmt(p.lastUsedAt)), keyCell, delCell);
+          return tr;
+        }));
+      }
+
+      async function removeKey(p) {
+        const r = await api("/api/passkeys?id=" + encodeURIComponent(p.id), { method: "DELETE" });
+        if (!r.ok) return say(r.data.message || "삭제하지 못했어요.", "err");
+        say(`"${p.name}" 패스키를 지웠어요. 기기에 남은 패스키도 기기 설정에서 지워 주세요.`, "ok");
+        await refresh();
+      }
+
+      $("#btn-login").addEventListener("click", login);
+      $("#btn-register-first").addEventListener("click", () => register($("#reg-account").value, $("#reg-name-first").value));
+      $("#btn-register-more").addEventListener("click", () => register(null, $("#reg-name-more").value));
+      $("#btn-logout").addEventListener("click", async () => {
+        await api("/api/logout", { method: "POST" });
+        say("로그아웃했어요.", "ok");
+        await refresh();
+      });
+      refresh();
+    })();
+  </script>
+</body>
+</html>
