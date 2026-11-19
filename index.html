@@ -384,6 +384,12 @@
     .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
     .js .reveal.is-in { opacity: 1; transform: none; }
 
+    /* ========== 공개·비공개 경계 ========== */
+    .boundary-line { display: flex; align-items: center; gap: 12px; margin: 0 0 20px; color: var(--text-muted); font-size: 13px; font-weight: 700; }
+    .boundary-line::before, .boundary-line::after { content: ""; flex: 1; border-top: 2px dashed var(--line); }
+    .boundary-card { padding: 28px; border-radius: var(--radius-xl); border: 2px dashed var(--brand-mid); background: var(--surface-soft); }
+    .boundary-card .section-desc { margin: 10px 0 18px; }
+
     /* ========== RESPONSIVE ========== */
     @media (max-width: 900px) {
       .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -424,6 +430,7 @@
         <li><a href="#summary">한눈에 보기</a></li>
         <li><a href="#experience">주요 경험</a></li>
         <li><a href="#scope">공개 범위</a></li>
+        <li><a href="private.html">비공개 영역 🔒</a></li>
       </ul>
       <button class="btn btn-soft" type="button" data-copy-link>링크 복사</button>
     </div>
@@ -847,6 +854,19 @@
               <li>회사·기관 내부 문서와 활동·이수 확인서 원본</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 여기까지 공개 영역. 아래 카드부터 비공개 영역으로 가는 경계다. 비공개 내용은 이 파일에 없다. -->
+    <section class="block private-boundary" id="private" aria-labelledby="private-title">
+      <div class="container">
+        <p class="boundary-line" aria-hidden="true"><span>여기까지 공개 영역 · 아래부터 비공개 영역</span></p>
+        <div class="boundary-card">
+          <p class="eyebrow">비공개 영역</p>
+          <h2 class="section-title" id="private-title">🔒 패스키로 로그인한 본인만 볼 수 있어요</h2>
+          <p class="section-desc">비밀번호 없이 패스키(WebAuthn)로만 들어갑니다. 안에는 직접 지어낸 가상 메모만 있고, 실제 개인정보는 넣지 않았습니다.</p>
+          <a class="btn btn-primary" href="private.html">비공개 영역으로 가기</a>
         </div>
       </div>
     </section>
