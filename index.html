@@ -26,7 +26,8 @@
       --surface-soft: #eef4fb;
       --text: #0f1b33;
       --text-sub: #46546d;
-      --text-muted: #6a7790;
+      --text-muted: #56637c;
+      --brand-accent-text: #2a5c96; /* 작은 글자용: 배경 대비 4.5:1 이상 */
       --line: #dde6f2;
       --focus: #1f3f97;
 
@@ -123,10 +124,10 @@
     .btn-soft:hover { background: var(--surface-soft); }
 
     /* ========== HERO ========== */
-    .hero { padding: 56px 0 40px; }
+    .hero { padding: 24px 0 32px; }
     .hero-card {
       position: relative; overflow: hidden;
-      padding: 44px;
+      padding: 32px 40px;
       border-radius: var(--radius-xl);
       background: var(--surface);
       box-shadow: var(--shadow);
@@ -152,10 +153,17 @@
       border: 1px solid var(--line); border-radius: 999px; background: #fff;
       color: var(--text-sub); font-size: 13px; font-weight: 600;
     }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    /* 첫 화면: 왼쪽 소개, 오른쪽 근거 사진 */
+    .hero-top { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 28px; align-items: start; }
+    .hero-top .hero-evidence { margin-top: 0; }
+    .hero-evidence .evidence-title { margin-bottom: 10px; }
+    .hero-evidence .gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .hero-evidence .shot span { padding: 8px 10px; font-size: 12.5px; }
+    .stat-tag { display: block; margin-bottom: 2px; color: var(--brand-accent-text); font-size: 12px; font-weight: 800; }
 
     /* Counter (숫자 카운트업) */
-    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 32px; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
     .stat {
       padding: 18px; border-radius: var(--radius-lg);
       background: var(--surface-soft);
@@ -165,7 +173,7 @@
 
     /* ========== SECTION ========== */
     section.block { padding: 40px 0; }
-    .eyebrow { margin: 0 0 6px; color: var(--brand-mid); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .eyebrow { margin: 0 0 6px; color: var(--brand-accent-text); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
     .section-title { margin: 0; font-size: clamp(25px, 3vw, 32px); line-height: 1.3; letter-spacing: -0.03em; }
     .section-desc { margin: 8px 0 0; max-width: 640px; color: var(--text-sub); font-size: 15px; }
     .section-head { margin-bottom: 22px; }
@@ -206,7 +214,7 @@
     }
     .tab:hover { color: var(--brand-navy); }
     .tab[aria-selected="true"] { background: #fff; color: var(--brand-navy); box-shadow: var(--shadow-sm); }
-    .tab-num { margin-right: 6px; color: var(--brand-mid); font-size: 13px; }
+    .tab-num { margin-right: 6px; color: var(--brand-accent-text); font-size: 13px; }
 
     .panel {
       padding: 32px; border-radius: var(--radius-xl);
@@ -241,7 +249,7 @@
       font-size: 15px; font-weight: 800;
     }
     .step.is-result .step-dot { background: var(--brand-gradient); color: #fff; }
-    .step-title { margin: 8px 0 4px; font-size: 14px; font-weight: 800; color: var(--brand-mid); letter-spacing: .04em; }
+    .step-title { margin: 8px 0 4px; font-size: 14px; font-weight: 800; color: var(--brand-accent-text); letter-spacing: .04em; }
     .step p { margin: 0; font-size: 15.5px; }
 
     /* Badge list (수치) */
@@ -269,6 +277,8 @@
     .acc-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
     .acc-content > div { overflow: hidden; }
     .acc-content.is-open { grid-template-rows: 1fr; }
+    /* 닫혀 있을 때는 안쪽 버튼에 Tab 초점이 가지 않게 */
+    .acc-content:not(.is-open) > div { visibility: hidden; }
     /* 펼친 뒤에는 잘림을 풀어, 안쪽 용어 설명(툴팁)이 가려지지 않게 */
     .acc-content.is-open > div { overflow: visible; }
     .acc-body { padding: 0 2px 18px; color: var(--text-sub); font-size: 15px; }
@@ -339,7 +349,7 @@
     /* ========== 공개 범위 ========== */
     .disclosure-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-bottom: 6px; }
     .disclosure-card { padding: 16px 18px; border-radius: var(--radius-md); background: var(--surface-soft); }
-    .disclosure-card h4 { margin: 0 0 6px; font-size: 14px; color: var(--text); }
+    .disclosure-card h3 { margin: 0 0 6px; font-size: 14px; color: var(--text); }
     .disclosure-card ul { margin: 0; padding-left: 18px; font-size: 14px; }
 
     .wide-card { padding: 8px 28px 12px; border-radius: var(--radius-xl); background: var(--surface); box-shadow: var(--shadow-sm); border: 1px solid var(--line); }
@@ -377,6 +387,7 @@
     /* ========== RESPONSIVE ========== */
     @media (max-width: 900px) {
       .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-top { grid-template-columns: 1fr; }
       .fit-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
@@ -412,6 +423,7 @@
       <ul class="nav-links">
         <li><a href="#summary">한눈에 보기</a></li>
         <li><a href="#experience">주요 경험</a></li>
+        <li><a href="#scope">공개 범위</a></li>
       </ul>
       <button class="btn btn-soft" type="button" data-copy-link>링크 복사</button>
     </div>
@@ -423,6 +435,8 @@
     <header class="hero" id="top">
       <div class="container">
         <div class="hero-card reveal">
+          <div class="hero-top">
+          <div class="hero-intro">
           <span class="badge"><span class="badge-dot" aria-hidden="true"></span>전자전기공학 전공 · 자기소개</span>
 
           <h1>장나영</h1>
@@ -433,8 +447,7 @@
           </p>
 
           <div class="hero-meta">
-            <span class="chip">성균관대 전자전기공학부 우등졸업 (2021.02~2025.08)</span>
-            <span class="chip">학점 4.13 / 4.50 · 전공 4.22</span>
+            <span class="chip">전자전기공학부 우등졸업 (2021.02~2025.08)</span>
             <span class="chip">HL만도 검증 인턴</span>
             <span class="chip">SKT ALEPH 수강 중 (2026.12 수료 예정)</span>
           </div>
@@ -443,21 +456,35 @@
             <a class="btn btn-primary" href="#summary">30초 요약 보기</a>
             <a class="btn btn-soft" href="#experience">경험 자세히 보기</a>
           </div>
+          </div>
+
+          <div class="hero-evidence evidence">
+            <h2 class="evidence-title">근거 자료 <span style="color:var(--text-muted);font-weight:600;font-size:13px">· 누르면 크게 보기</span></h2>
+            <div class="gallery">
+              <button class="shot" type="button" data-src="assets/wpt-system-measure.jpg" data-caption="무선전력전송 전체 시스템 출력 측정"><img src="assets/wpt-system-measure.jpg" alt="전원 공급기에 표시된 무선전력전송 출력 전압·전류 측정값"><span>무선전력전송 출력 측정</span></button>
+              <button class="shot" type="button" data-src="assets/rf-sim.jpg" data-caption="ADS 시뮬레이션 결과 (출력·이득·효율·S11)"><img src="assets/rf-sim.jpg" alt="ADS 시뮬레이션 결과 그래프 (출력·이득·효율·S11)"><span>RF 설계 시뮬레이션 결과</span></button>
+            </div>
+          </div>
+          </div>
 
           <div class="stats" aria-label="주요 수치">
             <div class="stat">
+              <span class="stat-tag">자작자동차</span>
               <span class="stat-value"><span data-count="15">15</span>회</span>
               <span class="stat-label">차량 셧다운 원인 찾으려고<br>반복한 주행 테스트</span>
             </div>
             <div class="stat">
+              <span class="stat-tag">자작자동차 대회</span>
               <span class="stat-value"><span data-count="5">5</span>초 이내</span>
               <span class="stat-label">대회 70 m 가속<br>셧다운 없이 완주</span>
             </div>
             <div class="stat">
+              <span class="stat-tag">무선전력전송</span>
               <span class="stat-value"><span data-count="63.2" data-decimals="1">63.2</span>%</span>
               <span class="stat-label">매칭 재설계 후<br>무선전력전송 전체 효율</span>
             </div>
             <div class="stat">
+              <span class="stat-tag">RF 설계</span>
               <span class="stat-value">약 <span data-count="300">300</span>회</span>
               <span class="stat-label">최적 설계를 찾기 위한<br>시뮬레이션 반복</span>
             </div>
@@ -584,7 +611,7 @@
                   · 디지털 사이드미러: 노면 진동이 오인식 원인임을 찾아 완충재와
                   <button class="term" type="button" aria-expanded="false">이동평균 필터<span class="tip" role="tooltip">최근 값 여러 개의 평균을 써서 튀는 값을 부드럽게 만드는 방법입니다.</span></button>를
                   적용, 20회 주행 중 오류 2회로 안정화<br>
-                  · 제6회 SKKU 자율주행 해커톤 1등: 5인 팀에서
+                  · 제6회 교내 자율주행 해커톤 1등: 5인 팀에서
                   <button class="term" type="button" aria-expanded="false">V2X<span class="tip" role="tooltip">차량이 신호등 같은 주변 시설과 무선으로 정보를 주고받는 기술입니다.</span></button>
                   신호등 연동과 정지선 정지·출발 처리 담당</p>
               </div></div>
@@ -725,7 +752,7 @@
           <div class="panel-top">
             <div>
               <h3>5G 소형기지국용 Doherty PA IC 설계 · 우수학부연구생</h3>
-              <p class="panel-sub">성균관대 RF 집적회로시스템 Lab(MCS Lab)에서 2.5~3.5 GHz 대역을 맡아 부하 선정부터 매칭까지 설계했습니다.</p>
+              <p class="panel-sub">학부 RF 집적회로 연구실에서 2.5~3.5 GHz 대역을 맡아 부하 선정부터 매칭까지 설계했습니다.</p>
             </div>
             <span class="badge panel-period">2023.06~07</span>
           </div>
@@ -788,6 +815,37 @@
                 <p>Carrier 6 W / Peaking 10 W 소자를 3 GHz에서 load pull하고, De-embedding으로 기생성분을 반영했습니다. Peaking Ropt는 30 Ω으로 선정했고, 안정성은 Mu factor로, 성능은 Gain·PAE·S11로 확인했습니다.</p>
               </div></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 대상과 공개 범위 -->
+    <section class="block" id="scope" aria-labelledby="scope-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">대상과 공개 범위</p>
+          <h2 class="section-title" id="scope-title">누구에게, 무엇을 보여 주는 페이지인가요</h2>
+          <p class="section-desc">이 페이지는 함께 일할 동료와 채용 담당자에게, 문제가 생기면 직접 측정하고 원인을 좁혀 끝까지 해결하는 엔지니어라는 것을 보여 줍니다.</p>
+        </div>
+        <div class="disclosure-grid reveal">
+          <div class="disclosure-card">
+            <h3>공개한 정보</h3>
+            <ul>
+              <li>전공과 졸업 구분(전자전기공학부 우등졸업)</li>
+              <li>프로젝트·인턴 경험 4개와 맡은 역할</li>
+              <li>테스트 횟수·효율 같은 결과 수치</li>
+              <li>실험·측정·시뮬레이션 화면 사진</li>
+            </ul>
+          </div>
+          <div class="disclosure-card">
+            <h3>공개하지 않은 정보</h3>
+            <ul>
+              <li>학교 이름과 학점·성적표</li>
+              <li>전화번호·이메일·집 주소 같은 연락처</li>
+              <li>생년월일과 학번</li>
+              <li>회사·기관 내부 문서와 활동·이수 확인서 원본</li>
+            </ul>
           </div>
         </div>
       </div>
